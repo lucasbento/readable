@@ -9,6 +9,7 @@ class Loading extends PureComponent {
           src="./loading.svg"
           width="84"
           height="84"
+          alt="Loading"
         />
       </div>
     );
