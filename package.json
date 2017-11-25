@@ -1,0 +1,10 @@
+{
+	"devDependencies": {
+		"lerna": "^2.5.1"
+	},
+	"scripts": {
+		"bootstrap": "lerna bootstrap --concurrency=1",
+		"start": "lerna exec -- npm run start",
+    "clean": "lerna clean"
+	}
+}
