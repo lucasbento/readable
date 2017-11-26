@@ -4,6 +4,10 @@ This projects uses [Lerna] to work as a simple monorepo.
 
 ## Development
 
+### `yarn install`
+
+Installs Lerna.
+
 ### `yarn run bootstrap`
 
 Bootstraps both projects (install the dependencies).
