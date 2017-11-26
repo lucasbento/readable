@@ -63,6 +63,17 @@ class PostDetail extends PureComponent {
       );
     }
 
+    if (!id) {
+      return (
+        <Card
+          fullScreen={true}
+          {...styles.container}
+        >
+          <h1 {...styles.notFoundText}>Post not found!</h1>
+        </Card>
+      );
+    }
+
     return (
       <Card
         fullScreen={true}
@@ -124,6 +135,10 @@ const styles = {
   container: css({
     margin: '30px 20%',
     padding: 20,
+  }),
+  notFoundText: css({
+    textAlign: 'center',
+    fontWeight: 'normal',
   }),
   headerContainer: css({
     display: 'flex',
