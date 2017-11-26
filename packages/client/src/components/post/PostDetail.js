@@ -20,9 +20,9 @@ import Button from '../common/Button';
 class PostDetail extends PureComponent {
   state = {
     showEditModal: (
-      this.props.history.location.state &&
-      this.props.history.location.state.shouldShowEdit ||
-      false
+      this.props.history.location.state ?
+        this.props.history.location.state.shouldShowEdit :
+        false
     ),
   };
 
