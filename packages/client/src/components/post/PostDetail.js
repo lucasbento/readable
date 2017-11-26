@@ -19,7 +19,11 @@ import Button from '../common/Button';
 
 class PostDetail extends PureComponent {
   state = {
-    showEditModal: false,
+    showEditModal: (
+      this.props.history.location.state &&
+      this.props.history.location.state.shouldShowEdit ||
+      false
+    ),
   };
 
   componentWillMount() {

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { css } from 'glamor';
 import { connect } from 'react-redux';
 
-import { requestGetPosts } from '../../modules/post';
+import { requestGetPosts, requestDeletePost } from '../../modules/post';
 
 import PostAdd from './PostAdd';
 import PostRow from './components/PostRow';
@@ -31,6 +31,18 @@ class PostList extends PureComponent {
       showAddModal: !showAddModal,
     }));
 
+  handleActionClick = (type) => (id) => {
+    if (type === 'edit') {
+      return this.props.history.push(`/posts/${id}`, {
+        shouldShowEdit: true,
+      });
+    }
+
+    if (window.confirm('Are you sure that you want to delete this post?')) {
+      return this.props.actions.requestDeletePost(id);
+    }
+  };
+
   render() {
     const { showAddModal } = this.state;
     const { isFetching, posts } = this.props.post;
@@ -55,6 +67,8 @@ class PostList extends PureComponent {
           <PostRow
             key={post.id}
             onClick={this.goToPostDetail(post)}
+            onClickEdit={this.handleActionClick('edit')}
+            onClickDelete={this.handleActionClick('delete')}
             {...post}
           />
         ))}
@@ -99,6 +113,7 @@ const mapStateToProps = ({ post }) => ({
 const mapDispatchToProps = dispatch => ({
   actions: {
     requestGetPosts: categoryPath => dispatch(requestGetPosts(categoryPath)),
+    requestDeletePost: postId => dispatch(requestDeletePost(postId)),    
   },
 });
 

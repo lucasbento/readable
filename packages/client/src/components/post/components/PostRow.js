@@ -4,8 +4,19 @@ import { css } from 'glamor';
 import Card from '../../common/Card';
 import VoteHandler from '../../common/VoteHandler';
 import CommentCount from './CommentCount';
+import Button from '../../common/Button';
 
 class PostRow extends PureComponent {
+  handleOnClickButton = (type) => (e) => {
+    e.stopPropagation();
+
+    if (type === 'edit') {
+      return this.props.onClickEdit(this.props.id);
+    }
+
+    return this.props.onClickDelete(this.props.id);
+  }
+
   render() {
     const {
       id,
@@ -27,9 +38,27 @@ class PostRow extends PureComponent {
           {...styles.cardContainer}
           onClick={onClick}
         >
-          <h1 {...styles.title}>
-            {title}
-          </h1>
+          <div {...styles.headerContainer}>
+            <h1 {...styles.title}>
+              {title}
+            </h1>
+
+            <div {...styles.actionsContainer}>
+              <Button
+                icon="mode_edit"
+                style={styles.button}
+                iconStyle={styles.buttonIcon}
+                onClick={this.handleOnClickButton('edit')}
+              />
+    
+              <Button
+                icon="delete"
+                style={styles.button}
+                iconStyle={styles.buttonIcon}
+                onClick={this.handleOnClickButton('delete')}
+              />
+            </div>
+          </div>
 
           <div {...styles.infoContainer}>
             <span>{author}</span>
@@ -54,6 +83,11 @@ const styles = {
     justifyContent: 'space-between',
     cursor: 'pointer',
   }),
+  headerContainer: css({
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  }),
   title: css({
     fontSize: 19,
     margin: '0px 0px 10px 0px',
@@ -62,6 +96,19 @@ const styles = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+  }),
+  actionsContainer: css({
+    display: 'flex',
+    flexDirection: 'row',
+  }),
+  button: css({
+    borderRadius: 0,
+    width: 25,
+    height: 25,
+    padding: 0,
+  }),
+  buttonIcon: css({
+    fontSize: 20,
   }),
 };
 
