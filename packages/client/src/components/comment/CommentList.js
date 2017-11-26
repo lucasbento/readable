@@ -35,7 +35,10 @@ class CommentList extends PureComponent {
 
   handleDeleteComment = (id) => () => {
     if (window.confirm('Are you sure that you want to delete this comment?')) {
-      return this.props.actions.requestDeleteComment(id);
+      return this.props.actions.requestDeleteComment({
+        id,
+        parentId: this.props.postId,
+      });
     }
   };
 

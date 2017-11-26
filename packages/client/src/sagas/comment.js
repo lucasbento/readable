@@ -10,6 +10,7 @@ import {
   fulfillEditComment,
   fulfillDeleteComment,
 } from '../modules/comment';
+import { requestGetPost } from '../modules/post';
 
 export function * requestGetComments ({ payload: postId }) {
   const { data } = yield api.get({
@@ -53,6 +54,7 @@ export function * requestAddComment ({ payload }) {
   });
 
   yield put(fulfillAddComment(data));
+  yield put(requestGetPost(parentId));
 }
 
 export function * requestEditComment ({ payload }) {
@@ -69,10 +71,11 @@ export function * requestEditComment ({ payload }) {
   yield put(fulfillEditComment(data));
 }
 
-export function * requestDeleteComment ({ payload: commentId }) {
+export function * requestDeleteComment ({ payload }) {
   const { data } = yield api.delete({
-    url: endpoints.comments({ commentId }),
+    url: endpoints.comments({ commentId: payload.id }),
   });
 
   yield put(fulfillDeleteComment(data));
+  yield put(requestGetPost(payload.parentId));
 }
