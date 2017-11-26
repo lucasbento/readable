@@ -8,7 +8,7 @@ class CommentCount extends PureComponent {
       <span {...props}>
         {value === 1 ?
           '1 comment' :
-          `${value} comments`
+          `${value || 0} comments`
         }
       </span>
     );
