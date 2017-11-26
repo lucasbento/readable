@@ -57,6 +57,18 @@ class PostList extends PureComponent {
       return (
         <div {...styles.container}>
           <h1 {...styles.noPostsText}>No posts found!</h1>
+
+          <PostAdd
+            show={showAddModal}
+            onClose={this.toggleAddModal}
+          />
+
+          <Button
+            styleType="float"
+            icon="add"
+            style={styles.button}
+            onClick={this.toggleAddModal}
+          />
         </div>
       );
     }
