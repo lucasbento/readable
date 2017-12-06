@@ -4,7 +4,6 @@ import { css } from 'glamor';
 import PostList from './post/PostList';
 import CategoryList from './category/CategoryList';
 
-// <div key="separator" {...styles.separator} />,
 class Main extends PureComponent {
   render() {
     return (
